@@ -1,5 +1,6 @@
 ﻿using FluentAssertions;
 using System;
+using MongoDB.Bson;
 using Xunit;
 
 namespace LiteDB.Tests.Document
@@ -30,7 +31,7 @@ namespace LiteDB.Tests.Document
         public void BsonDocument_Inner()
         {
             var customer = new BsonDocument();
-            customer["_id"] = ObjectId.NewObjectId();
+            customer["_id"] = ObjectId.GenerateNewId();
             customer["Name"] = "John Doe";
             customer["CreateDate"] = DateTime.Now;
             customer["Phones"] = new BsonArray { "8000-0000", "9000-000" };

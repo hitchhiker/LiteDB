@@ -1,4 +1,5 @@
 ﻿using FluentAssertions;
+using MongoDB.Bson;
 using Xunit;
 
 namespace LiteDB.Tests.Document
@@ -9,11 +10,11 @@ namespace LiteDB.Tests.Document
         public void ObjectId_BsonValue()
         {
             var oid0 = ObjectId.Empty;
-            var oid1 = ObjectId.NewObjectId();
-            var oid2 = ObjectId.NewObjectId();
-            var oid3 = ObjectId.NewObjectId();
+            var oid1 = ObjectId.GenerateNewId();
+            var oid2 = ObjectId.GenerateNewId();
+            var oid3 = ObjectId.GenerateNewId();
 
-            var c1 = new ObjectId(oid1);
+            var c1 = new ObjectId(oid1.ToByteArray());
             var c2 = new ObjectId(oid2.ToString());
             var c3 = new ObjectId(oid3.ToByteArray());
 
@@ -36,7 +37,7 @@ namespace LiteDB.Tests.Document
         public void ObjectId_Equals_Null_Does_Not_Throw()
         {
             var oid0 = default(ObjectId);
-            var oid1 = ObjectId.NewObjectId();
+            var oid1 = ObjectId.GenerateNewId();
 
             oid1.Equals(null).Should().BeFalse();
             oid1.Equals(oid0).Should().BeFalse();

@@ -5,6 +5,7 @@ using System.Globalization;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
+using MongoDB.Bson;
 using static LiteDB.Constants;
 
 namespace LiteDB
@@ -22,7 +23,7 @@ namespace LiteDB
         /// Create a new OBJECTID value
         /// </summary>
         [Volatile]
-        public static BsonValue OBJECTID() => ObjectId.NewObjectId();
+        public static BsonValue OBJECTID() => ObjectId.GenerateNewId();
 
         /// <summary>
         /// Create a new GUID value
@@ -245,7 +246,7 @@ namespace LiteDB
             }
             else if(value.IsString)
             {
-                ObjectId val = null;
+                ObjectId? val = null;
                 var isObjectId = false;
 
                 try

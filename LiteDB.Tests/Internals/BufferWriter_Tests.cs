@@ -3,6 +3,7 @@ using System.Linq;
 using System.Text;
 using FluentAssertions;
 using LiteDB.Engine;
+using MongoDB.Bson;
 using Xunit;
 
 namespace LiteDB.Internals
@@ -129,7 +130,7 @@ namespace LiteDB.Internals
 
             var g = Guid.NewGuid();
             var d = DateTime.Now;
-            var o = ObjectId.NewObjectId();
+            var o = ObjectId.GenerateNewId();
 
             using (var w = new BufferWriter(source))
             {
@@ -210,7 +211,7 @@ namespace LiteDB.Internals
                 ["document"] = new BsonDocument {["_id"] = 1},
                 ["array"] = new BsonArray {1, 2, 3},
                 ["binary"] = new byte[50].Fill(255, 0, 49),
-                ["objectId"] = ObjectId.NewObjectId(),
+                ["objectId"] = ObjectId.GenerateNewId(),
                 ["guid"] = Guid.NewGuid(),
                 ["boolean"] = true,
                 ["date"] = DateTime.UtcNow,

@@ -3,6 +3,7 @@ using System.IO;
 using System.Linq;
 using LiteDB;
 using FluentAssertions;
+using MongoDB.Bson;
 using Xunit;
 
 namespace LiteDB.Tests.Database

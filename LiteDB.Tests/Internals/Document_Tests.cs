@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Collections.Generic;
 using FluentAssertions;
+using MongoDB.Bson;
 using Xunit;
 
 namespace LiteDB.Internals
@@ -17,7 +18,7 @@ namespace LiteDB.Internals
             var document = new BsonDocument();
             document.Add("string", new BsonValue("string"));
             document.Add("bool", new BsonValue(true));
-            document.Add("objectId", new BsonValue(ObjectId.NewObjectId()));
+            document.Add("objectId", new BsonValue(ObjectId.GenerateNewId()));
             document.Add("DateTime", new BsonValue(DateTime.Now));
             document.Add("decimal", new BsonValue((decimal) 1));
             document.Add("double", new BsonValue((double) 1.0));

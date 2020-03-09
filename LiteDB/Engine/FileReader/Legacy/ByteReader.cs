@@ -1,6 +1,7 @@
 ﻿using LiteDB.Engine;
 using System;
 using System.Text;
+using MongoDB.Bson;
 using static LiteDB.Constants;
 
 namespace LiteDB

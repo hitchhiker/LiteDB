@@ -3,6 +3,7 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using MongoDB.Bson;
 using static LiteDB.Constants;
 
 namespace LiteDB.Engine
@@ -48,7 +49,7 @@ namespace LiteDB.Engine
             if (!doc.TryGetValue("_id", out var id))
             {
                 doc["_id"] = id =
-                    autoId == BsonAutoId.ObjectId ? new BsonValue(ObjectId.NewObjectId()) :
+                    autoId == BsonAutoId.ObjectId ? new BsonValue(ObjectId.GenerateNewId()) :
                     autoId == BsonAutoId.Guid ? new BsonValue(Guid.NewGuid()) :
                     this.GetSequence(snapshot, autoId);
             }

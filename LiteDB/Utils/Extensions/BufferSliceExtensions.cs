@@ -1,7 +1,9 @@
 ﻿using LiteDB.Engine;
 using System;
 using System.Linq;
+using System.Reflection;
 using System.Text;
+using MongoDB.Bson;
 using static LiteDB.Constants;
 
 namespace LiteDB
@@ -61,7 +63,7 @@ namespace LiteDB
 
         public static ObjectId ReadObjectId(this BufferSlice buffer, int offset)
         {
-            return new ObjectId(buffer.Array, buffer.Offset + offset);
+            return buffer.Array.GetObjectId(buffer.Offset + offset);
         }
 
         public static Guid ReadGuid(this BufferSlice buffer, int offset)

@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
+using MongoDB.Bson;
+using MongoDB.Bson.IO;
 using static LiteDB.Constants;
 
 namespace LiteDB.Engine
@@ -335,8 +337,7 @@ namespace LiteDB.Engine
 
             if (_currentPosition + 12 <= _current.Count)
             {
-                value = new ObjectId(_current.Array, _current.Offset + _currentPosition);
-
+                value = _current.Array.GetObjectId(_current.Offset + _currentPosition);
                 this.MoveFordward(12);
             }
             else
@@ -345,7 +346,7 @@ namespace LiteDB.Engine
 
                 this.Read(buffer, 0, 12);
 
-                value = new ObjectId(buffer, 0);
+                value = new ObjectId(buffer);
 
                 BufferPool.Return(buffer);
             }
